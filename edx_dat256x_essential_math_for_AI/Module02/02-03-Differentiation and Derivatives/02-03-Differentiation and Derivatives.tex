@@ -1,0 +1,1430 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{02-03-Differentiation and Derivatives}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Differentiation and
+Derivatives}\label{differentiation-and-derivatives}
+
+So far in this course, you've learned how to evaluate limits for points
+on a line. Now you're going to build on that knowledge and look at a
+calculus technique called \emph{differentiation}. In differentiation, we
+use our knowledge of limits to calculate the \emph{derivative} of a
+function in order to determine the rate of change at an individual point
+on a line.
+
+Let's remind ourselves of the problem we're trying to solve, here's a
+function:
+
+\begin{equation}f(x) = x^{2} + x\end{equation}
+
+We can visualize part of the line that this function defines using the
+folllowing Python code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Here\PYZsq{}s the function}
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_1_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now, we know that we can calculate the average rate of change for a
+given interval on the line by calculating the slope for a secant line
+that connects two points on the line. For example, we can calculate the
+average change for the interval between \texttt{x=4} and \texttt{x=6} by
+dividing the change (or \emph{delta}, indicated as Δ) in the value of
+\emph{f(x)} by the change in the value of \emph{x}:
+
+\begin{equation}m = \frac{\Delta{f(x)}}{\Delta{x}} \end{equation}
+
+The delta for \emph{f(x)} is calculated by subtracting the \emph{f(x)}
+values of our points, and the delta for \emph{x} is calculated by
+subtracting the \emph{x} values of our points; like this:
+
+\begin{equation}m = \frac{f(x)_{2} - f(x)_{1}}{x_{2} - x_{1}} \end{equation}
+
+So for the interval between \texttt{x=4} and \texttt{x=6}, that's:
+
+\begin{equation}m = \frac{f(6) - f(4)}{6 - 4} \end{equation}
+
+We can calculate and plot this using the following Python:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set the a values}
+        \PY{n}{x1} \PY{o}{=} \PY{l+m+mi}{4}
+        \PY{n}{x2} \PY{o}{=} \PY{l+m+mi}{6}
+        
+        \PY{c+c1}{\PYZsh{} Get the corresponding f(x) values }
+        \PY{n}{y1} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Calculate the slope by dividing the deltas}
+        \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{n}{y2} \PY{o}{\PYZhy{}} \PY{n}{y1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values for the secant line}
+        \PY{n}{sx} \PY{o}{=} \PY{p}{[}\PY{n}{x1}\PY{p}{,}\PY{n}{x2}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{sy} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{sx}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the interval points}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,}\PY{n}{x2}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{y1}\PY{p}{,}\PY{n}{y2}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the secant line}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sx}\PY{p}{,}\PY{n}{sy}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magenta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Display the calculated average rate of change}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average change =}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{p}{(}\PY{n}{y2}\PY{o}{+}\PY{n}{y1}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_3_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The average rate of change for the interval between \texttt{x=4} and
+\texttt{x=6} is 11/1 (or simply 11), meaning that for every \textbf{1}
+added to \emph{x}, \emph{f(x)} increases by \textbf{11}. Put another
+way, if x represents time in seconds and f(x) represents distance in
+meters, the average rate of change for distance over time (in other
+words, \emph{velocity}) for the 4 to 6 second interval is 11
+meters-per-second.
+
+So far, this is just basic algebra; but what if instead of the average
+rate of change over an interval, we want to calculate the rate of change
+at a single point, say, where \texttt{x\ =\ 4.5}?
+
+One approach we could take is to create a secant line between the point
+at which we want the slope and another point on the function line that
+is infintesimally close to it. So close in fact that the secant line is
+actually a tangent that goes through both points. We can then calculate
+the slope for the secant line as before. This would look something like
+the graph produced by the following code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set the x1 point, arbitrarily 5}
+        \PY{n}{x1} \PY{o}{=} \PY{l+m+mf}{4.5}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set the x2 point, very close to x1}
+        \PY{n}{x2} \PY{o}{=} \PY{l+m+mf}{5.000000001}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the point}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{x1}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y1}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Approximate the tangent slope and plot it}
+        \PY{n}{m} \PY{o}{=} \PY{p}{(}\PY{n}{y2}\PY{o}{\PYZhy{}}\PY{n}{y1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{x2}\PY{o}{\PYZhy{}}\PY{n}{x1}\PY{p}{)}
+        \PY{n}{xMin} \PY{o}{=} \PY{n}{x1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}
+        \PY{n}{yMin} \PY{o}{=} \PY{n}{y1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}
+        \PY{n}{xMax} \PY{o}{=} \PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{3}
+        \PY{n}{yMax} \PY{o}{=} \PY{n}{y1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{xMin}\PY{p}{,}\PY{n}{xMax}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{yMin}\PY{p}{,}\PY{n}{yMax}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magenta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Calculating a Derivative}\label{calculating-a-derivative}
+
+In the Python code above, we created the (almost) tangential secant line
+by specifying a point that is very close to the point at which we want
+to calculate the rate of change. This is adequate to show the line
+conceptually in the graph, but it's not a particularly generalizable (or
+accurate) way to actually calculate the line so that we can get the rate
+of change at any given point.
+
+If only we knew of a way to calculate a point on the line that is as
+close as possible to point with a given \emph{x} value.
+
+Oh wait, we do! It's a \emph{limit}.
+
+So how do we apply a limit in this scenario? Well, let's start by
+examining our general approach to calculating slope in a little more
+detail.Our tried and tested approach is to plot a secant line between
+two points at different values of x, so let's plot an arbitrary
+(\emph{x,y}) point, and then add an arbitrary amount to \emph{x}, which
+we'll call \emph{h}. Then we know that we can plot a secant line between
+(\emph{x,f(x)}) and (\emph{x+h,f(x+h)}) and find its slope.
+
+Run the cell below to see these points:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set the x point}
+        \PY{n}{x1} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} set the increment}
+        \PY{n}{h} \PY{o}{=} \PY{l+m+mi}{3}
+        
+        \PY{c+c1}{\PYZsh{} set the x+h point}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{x1}\PY{o}{+}\PY{n}{h}
+        \PY{n}{y2} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x2}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the x point}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(x,f(x))}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y1}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the x+h point}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x2}\PY{p}{,}\PY{n}{y2}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(x+h, f(x+h))}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{n}{x2}\PY{p}{,}\PY{n}{y2}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{x2}\PY{o}{+}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we saw previously, our formula to calculate slope is:
+
+\begin{equation}m = \frac{\Delta{f(x)}}{\Delta{x}} \end{equation}
+
+The delta for \emph{f(x)} is calculated by subtracting the \emph{f(x +
+h)} and \emph{f(x)} values of our points, and the delta for \emph{x} is
+just the difference between \emph{x} and \emph{x + h}; in other words,
+\emph{h}:
+
+\begin{equation}m = \frac{f(x + h) - f(x)}{h} \end{equation}
+
+What we actually need is the slope at the shortest possible distance
+between x and x+h, so we're looking for the smallest possible value of
+\emph{h}. In other words, we need the limit as \emph{h} approaches 0.
+
+\begin{equation}\lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \end{equation}
+
+This equation is generalizable, and we can use it as the definition of a
+function to help us find the slope at any given value of \emph{x} on the
+line, and it's what we call the \emph{derivative} of our original
+function (which in this case is called \emph{f}). This is generally
+indicated in \emph{Lagrange} notation like this:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \end{equation}
+
+You'll also sometimes see derivatives written in \emph{Leibniz's}
+notation like this:
+
+\begin{equation}\frac{d}{dx}f(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \end{equation}
+
+\textbf{\emph{Note:}} \emph{Some textbooks use }\textbf{h}* to symbolize
+the difference between \textbf{\emph{x0}} and \textbf{x1}, while others
+use \textbf{Δx}. It makes no diffrerence which symbolic value you use.*
+
+    \paragraph{Alternate Form for a
+Derivative}\label{alternate-form-for-a-derivative}
+
+The formula above shows the generalized form for a derivative. You can
+use the derivative function to get the slope at any given point, for
+example to get the slope at point \emph{a} you could just plug the value
+for \emph{a} into the generalized derivative function:
+
+\begin{equation}f'(\textbf{a}) = \lim_{h \to 0} \frac{f(\textbf{a} + h) - f(\textbf{a})}{h} \end{equation}
+
+Or you could use the alternate form, which is specific to point
+\emph{a}:
+
+\begin{equation}f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a} \end{equation}
+
+These are mathematically equivalent.
+
+    \subsubsection{Finding the Derivative for a Specific
+Point}\label{finding-the-derivative-for-a-specific-point}
+
+It's easier to understand differentiation by seeing it in action, so
+let's use it to find the derivitive for a specific point in the function
+\textbf{\emph{f}}.
+
+Here's the definition of function \textbf{\emph{f}}:
+
+\begin{equation}f(x) = x^{2} + x\end{equation}
+
+Let's say we want to find \textbf{\emph{f'(2)}} (the derivative for
+\textbf{\emph{f}} when \textbf{\emph{x}} is 2); so we're trying to find
+the slope at the point shown by the following code:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set the point}
+        \PY{n}{x1} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the point}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(x,f(x))}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y1}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Here's our generalized formula for finding a derivative at a specific
+point (\emph{a}):
+
+\begin{equation}f'(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} \end{equation}
+
+So let's just start by plugging our \emph{a} value in:
+
+\begin{equation}f'(\textbf{2}) = \lim_{h \to 0} \frac{f(\textbf{2} + h) - f(\textbf{2})}{h} \end{equation}
+
+We know that \textbf{\emph{f(x)}} encapsulates the equation
+\textbf{\emph{x2 + x}}, so we can rewrite our derivative equation as:
+
+\begin{equation}f'(2) = \lim_{h \to 0} \frac{((2+h)^{2} + 2 + h) - (2^{2} + 2)}{h} \end{equation}
+
+We can apply the distribution property to \textbf{\emph{(2 + h)2}} using
+the rule that \emph{(a + b)2 = a2 + b2 + 2ab}:
+
+\begin{equation}f'(2) = \lim_{h \to 0} \frac{(4 + h^{2} + 4h + 2 + h) - (2^{2} + 2)}{h} \end{equation}
+
+Then we can simplify 22 + 2 (22 is 4, plus 2 gives is 6):
+
+\begin{equation}f'(2) = \lim_{h \to 0} \frac{(4 + h^{2} + 4h + 2 + h) - 6}{h} \end{equation}
+
+We can combine like terms on the left side of the numerator to make
+things a little clearer:
+
+\begin{equation}f'(2) = \lim_{h \to 0} \frac{(h^{2} + 5h + 6) - 6}{h} \end{equation}
+
+Which combines even further to get rid of the \emph{6}:
+
+\begin{equation}f'(2) = \lim_{h \to 0} \frac{h^{2} + 5h}{h} \end{equation}
+
+And finally, we can simplify the fraction:
+
+\begin{equation}f'(2) = \lim_{h \to 0} h + 5 \end{equation}
+
+To get the limit when \emph{h} is approaching 0, we can use direct
+substitution for h:
+
+\begin{equation}f'(2) = 0 + 5 \end{equation}
+
+so:
+
+\begin{equation}f'(2) = 5 \end{equation}
+
+Let's draw a tangent line with that slope on our graph to see if it
+looks right:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set the point}
+        \PY{n}{x1} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Specify the derivative we calculated above}
+        \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{5}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the point}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(x,f(x))}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y1}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the tangent line using the derivative we calculated}
+        \PY{n}{xMin} \PY{o}{=} \PY{n}{x1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}
+        \PY{n}{yMin} \PY{o}{=} \PY{n}{y1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}
+        \PY{n}{xMax} \PY{o}{=} \PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{3}
+        \PY{n}{yMax} \PY{o}{=} \PY{n}{y1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{xMin}\PY{p}{,}\PY{n}{xMax}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{yMin}\PY{p}{,}\PY{n}{yMax}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magenta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsubsection{Finding a Derivative for Any
+Point}\label{finding-a-derivative-for-any-point}
+
+Now let's put it all together and define a function that we can use to
+find the derivative for any point in the \textbf{\emph{f}} function:
+
+Here's our general derivative function again:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \end{equation}
+
+We know that \textbf{\emph{f(x)}} encapsulates the equation
+\textbf{\emph{x2 + x}}, so we can rewrite our derivative equation as:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{((x+h)^{2} + x + h) - (x^{2} + x)}{h} \end{equation}
+
+We can apply the distribution property to \textbf{\emph{(x + h)2}} using
+the rule that \emph{(a + b)2 = a2 + b2 + 2ab}:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{(x^{2} + h^{2} + 2xh + x + h) - (x^{2} + x)}{h} \end{equation}
+
+Then we can use the distributive property to expand \textbf{\emph{- (x2
++ x)}}, which is the same thing as \emph{-1(x2 + x)}, to \textbf{\emph{-
+x2 - x}}:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{x^{2} + h^{2} + 2xh + x + h - x^{2} - x}{h} \end{equation}
+
+We can combine like terms on the numerator to make things a little
+clearer:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{h^{2} + 2xh + h}{h} \end{equation}
+
+And finally, we can simplify the fraction:
+
+\begin{equation}f'(x) = \lim_{h \to 0} 2x + h + 1 \end{equation}
+
+To get the limit when \emph{h} is approaching 0, we can use direct
+substitution for h:
+
+\begin{equation}f'(x) = 2x + 0 + 1 \end{equation}
+
+so:
+
+\begin{equation}f'(x) = 2x + 1 \end{equation}
+
+Now we have a function for the derivative of \textbf{\emph{f}}, which we
+can apply to any \emph{x} value to find the slope of the function at
+\textbf{\emph{f(x)}}.
+
+For example, let's find the derivative of \textbf{\emph{f}} with an
+\emph{x} value of 5:
+
+\begin{equation}f'(5) = 2\cdot5 + 1 = 10 + 1 = 11\end{equation}
+
+Let's use Python to define the \textbf{\emph{f(x)}} and
+\textbf{\emph{f'(x)}} functions, plot \textbf{\emph{f(5)}} and show the
+tangent line for \textbf{\emph{f'(5)}}:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Create function f}
+        \PY{k}{def} \PY{n+nf}{f}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{n}{x}
+        
+        \PY{c+c1}{\PYZsh{} Create derivative function for f}
+        \PY{k}{def} \PY{n+nf}{fd}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+        
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set the point}
+        \PY{n}{x1} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{y1} \PY{o}{=} \PY{n}{f}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Calculate the derivative using the derivative function}
+        \PY{n}{m} \PY{o}{=} \PY{n}{fd}\PY{p}{(}\PY{n}{x1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{f(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the point}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{(x,f(x))}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{y1}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{n}{x1}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y1}\PY{o}{+}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the tangent line using the derivative we calculated}
+        \PY{n}{xMin} \PY{o}{=} \PY{n}{x1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{3}
+        \PY{n}{yMin} \PY{o}{=} \PY{n}{y1} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}
+        \PY{n}{xMax} \PY{o}{=} \PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{3}
+        \PY{n}{yMax} \PY{o}{=} \PY{n}{y1} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{m}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{[}\PY{n}{xMin}\PY{p}{,}\PY{n}{xMax}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{yMin}\PY{p}{,}\PY{n}{yMax}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{magenta}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Differentiability}\label{differentiability}
+
+It's important to realize that a function may not be
+\emph{differentiable} at every point; that is, you might not be able to
+calculate the derivative for every point on the function line.
+
+To be differentiable at a given point: - The function must be
+\emph{continuous} at that point. - The tangent line at that point cannot
+be vertical - The line must be \emph{smooth} at that point (that is, it
+cannot take on a sudden change of direction at the point)
+
+For example, consider the following (somewhat bizarre) function:
+
+\begin{equation}
+q(x) = \begin{cases}
+  \frac{40,000}{x^{2}}, & \text{if } x < -4, \\
+  (x^{2} -2) \cdot (x - 1), & \text{if } x \ne 0 \text{ and } x \ge -4 \text{ and } x < 8, \\
+  (x^{2} -2), & \text{if } x \ne 0 \text{ and } x \ge 8
+\end{cases}
+\end{equation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Define function q}
+        \PY{k}{def} \PY{n+nf}{q}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if} \PY{n}{x} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{if} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{:}
+                    \PY{k}{return} \PY{l+m+mi}{40000} \PY{o}{/} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{x} \PY{o}{\PYZlt{}} \PY{l+m+mi}{8}\PY{p}{:}
+                    \PY{k}{return} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{return} \PY{p}{(}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Plot output from function g}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{x}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{4.01}\PY{p}{)}
+        \PY{n}{x2} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        \PY{n}{x2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mf}{7.9999}\PY{p}{)}
+        \PY{n}{x2} \PY{o}{=} \PY{n}{x2} \PY{o}{+} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Get the corresponding y values from the function}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{n}{q}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        \PY{n}{y2} \PY{o}{=} \PY{p}{[}\PY{n}{q}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x2}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q(x)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot x against q(x)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x2}\PY{p}{,}\PY{n}{y2}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{n}{q}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A (x= \PYZhy{}4)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{q}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.9}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{,} \PY{n}{q}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.9}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B (x= 0)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{40}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{q}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C (x= 8)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{q}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{xytext}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The points marked on this graph are non-differentiable: * Point
+\textbf{A} is non-continuous - the limit from the negative side is
+infinity, but the limit from the positive side ≈ -57 * Point \textbf{B}
+is also non-continuous - the function is not defined at x = 0. * Point
+\textbf{C} is defined and continuous, but the sharp change in direction
+makes it non-differentiable.
+
+    \subsection{Derivatives of Equations}\label{derivatives-of-equations}
+
+We've been talking about derivatves of \emph{functions}, but it's
+important to remember that functions are just named operations that
+return a value. We can apply what we know about calculating derivatives
+to any equation, for example:
+
+\begin{equation}\frac{d}{dx}(2x + 6)\end{equation}
+
+Note that we generally switch to \emph{Leibniz's} notation when finding
+derivatives of equations that are not encapsulated as functions; but the
+approach for solving this example is exactly the same as if we had a
+hypothetical function with the definition \emph{2x + 6}:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = \lim_{h \to 0} \frac{(2(x+h) + 6) - (2x + 6)}{h} \end{equation}
+
+After factoring out the* 2(x+h)* on the left and the \emph{-(2x - 6)} on
+the right, this is:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = \lim_{h \to 0} \frac{2x + 2h + 6 - 2x - 6}{h} \end{equation}
+
+We can simplify this to:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = \lim_{h \to 0} \frac{2h}{h} \end{equation}
+
+Now we can factor \emph{h} out entirely, so at any point:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = 2 \end{equation}
+
+If you run the Python code below to plot the line created by the
+equation, you'll see that it does indeed have a constant slope of 2:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Create an array of x values from 0 to 10 to plot}
+        \PY{n}{x} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Use the function to get the y values}
+        \PY{n}{y} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{i}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{6} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Set up the graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{27}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Plot the function}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Derivative Rules and
+Operations}\label{derivative-rules-and-operations}
+
+When working with derivatives, there are some rules, or shortcuts, that
+you can apply to make your life easier.
+
+\subsubsection{Basic Derivative Rules}\label{basic-derivative-rules}
+
+Let's start with some basic rules that it's useful to know.
+
+\begin{itemize}
+\item
+  If \emph{f(x)} = \emph{C} (where \emph{C} is a constant), then
+  \emph{f'(x)} = 0
+
+  This makes sense if you think about it for a second. No matter what
+  value you use for \emph{x}, the function returns the same constant
+  value; so the graph of the function will be a horizontal line. There's
+  no rate of change in a horiziontal line, so its slope is 0 at all
+  points. This is true of any constant, including symbolic constants
+  like \emph{π} (pi).
+
+  So, for example:
+\end{itemize}
+
+\begin{equation}f(x) = 6 \;\; \therefore \;\; f'(x) = 0 \end{equation}
+
+Or:
+
+\begin{equation}f(x) = \pi \;\; \therefore \;\; f'(x) = 0 \end{equation}
+
+\begin{itemize}
+\item
+  If \emph{f(x)} = \emph{Cg(x)}, then \emph{f'(x)} = \emph{Cg'(x)}
+
+  This rule tells us that if a function is equal to a second function
+  multiplied by a constant, then the derivative of the first function
+  will be equal to the derivative of the second function multiplied by
+  the same constant. For example:
+\end{itemize}
+
+\begin{equation}f(x) = 2g(x) \;\; \therefore \;\; f'(x) = 2g'(x) \end{equation}
+
+\begin{itemize}
+\item
+  If \emph{f(x)} = \emph{g(x)} + \emph{h(x)}, then \emph{f'(x)} =
+  \emph{g'(x)} + \emph{h'(x)}
+
+  In other words, if a function is the sum of two other functions, then
+  the derivative of the first function is the sum of the derivatives of
+  the other two functions. For example:
+\end{itemize}
+
+\begin{equation}f(x) = g(x) + h(x) \;\; \therefore \;\; f'(x) = g'(x) + h'(x) \end{equation}
+
+Of course, this also applies to subtraction:
+
+\begin{equation}f(x) = k(x) - l(x) \;\; \therefore \;\; f'(x) = k'(x) - l'(x) \end{equation}
+
+As discussed previously, functions are just equations encapsulated as a
+named entity that return a value; and the rules can be applied to any
+equation. For example:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = \frac{d}{dx} 2x +  \frac{d}{dx} 6\end{equation}
+
+So we can take advantage of the rules to make the calculation a little
+easier:
+
+\begin{equation}\frac{d}{dx}(2x) = \lim_{h \to 0} \frac{2(x+h) - 2x}{h} \end{equation}
+
+After factoring out the* 2(x+h)* on the left, this is:
+
+\begin{equation}\frac{d}{dx}(2x) = \lim_{h \to 0} \frac{2x + 2h - 2x}{h} \end{equation}
+
+We can simplify this to:
+
+\begin{equation}\frac{d}{dx}(2x) = \lim_{h \to 0} \frac{2h}{h} \end{equation}
+
+Which gives us:
+
+\begin{equation}\frac{d}{dx}(2x) = 2 \end{equation}
+
+Now we can turn our attention to the derivative of the constant 6 with
+respect to \emph{x}, and we know that the derivative of a constant is
+always 0, so:
+
+\begin{equation}\frac{d}{dx}(6) = 0\end{equation}
+
+We add the two derivatives we calculated:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = 2 + 0\end{equation}
+
+Which gives us our result:
+
+\begin{equation}\frac{d}{dx}(2x + 6) = 2\end{equation}
+
+\subsubsection{The Power Rule}\label{the-power-rule}
+
+The \emph{power rule} is one of the most useful shortcuts in the world
+of differential calculus. It can be stated like this:
+
+\begin{equation}f(x) = x^{n} \;\; \therefore \;\; f'(x) = nx^{n-1}\end{equation}
+
+So if our function for \emph{x} returns \emph{x} to the power of some
+constant (which we'll call \emph{n}), then the derivative of the
+function for \emph{x} is \emph{n} times \emph{x} to the power of
+\emph{n} - 1.
+
+It's probably helpful to look at a few examples to see how this works:
+
+\begin{equation}f(x) = x^{3} \;\; \therefore \;\; f'(x) = 3x^{2}\end{equation}
+
+\begin{equation}f(x) = x^{-2} \;\; \therefore \;\; f'(x) = -2x^{-3}\end{equation}
+
+\begin{equation}f(x) = x^{2} \;\; \therefore \;\; f'(x) = 2x\end{equation}
+
+In each of these examples, the exponential of \emph{x} in the function
+definition becomes the coefficient for \emph{x} in the derivative
+definition, with the exponential is decremented by 1.
+
+Here's a worked example to find the derivative of the following
+function:
+
+\begin{equation}f(x) = x^{2}\end{equation}
+
+So we start with the general derivative function:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} \end{equation}
+
+We can plug in our definition for \emph{f}:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{(x + h)^{2} - x^{2}}{h} \end{equation}
+
+Now we can factor out the perfect square binomial on the left:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{x^{2} + h^{2} + 2xh - x^{2}}{h} \end{equation}
+
+The x2 terms cancel each other out so we get to:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{h^{2} + 2xh}{h} \end{equation}
+
+Which simplifies to:
+
+\begin{equation}f'(x) = \lim_{h \to 0} h + 2x \end{equation}
+
+With \emph{h} approaching 0, this is:
+
+\begin{equation}f'(x) = 0 + 2x \end{equation}
+
+So our answer is:
+
+\begin{equation}f'(x) = 2x \end{equation}
+
+Note that we could have achieved the same result by simply applying the
+power rule and transforming x2 to 2x1 (which is the same as 2x).
+
+\subsubsection{The Product Rule}\label{the-product-rule}
+
+The product rule can be stated as:
+
+\begin{equation}\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x) \end{equation}
+
+OK, let's break that down. What it's saying is that the derivative of
+\emph{f(x)} multiplied by \emph{g(x)} is equal to the derivative of
+\emph{f(x)} multiplied by the value of \emph{g(x)} added to the value of
+\emph{f(x)} multiplied by the derivative of \emph{g(x}).
+
+Let's see an example based on the following two functions:
+
+\begin{equation}f(x) = 2x^{2} \end{equation}
+
+\begin{equation}g(x) = x + 1 \end{equation}
+
+Let's start by calculating the derivative of \emph{f(x)}:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{2(x + h)^{2} - 2x^{2}}{h} \end{equation}
+
+This factors out to:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{2x^{2} + 2h^{2} + 4xh - 2x^{2}}{h} \end{equation}
+
+Which when we cancel out the 2x2 and -2x2 is:
+
+\begin{equation}f'(x) = \lim_{h \to 0} \frac{2h^{2} + 4xh}{h} \end{equation}
+
+Which simplifies to:
+
+\begin{equation}f'(x) = \lim_{h \to 0} 2h + 4x \end{equation}
+
+With \emph{h} approaching 0, this is:
+
+\begin{equation}f'(x) = 4x \end{equation}
+
+Now let's look at \emph{g'(x)}:
+
+\begin{equation}g'(x) = \lim_{h \to 0} \frac{(x + h) + 1 - (x + 1)}{h} \end{equation}
+
+We can just remove the brackets on the left and factor out the \emph{-(x
++ 1)} on the right:
+
+\begin{equation}g'(x) = \lim_{h \to 0} \frac{x + h + 1 - x - 1}{h} \end{equation}
+
+Which can be cleaned up to:
+
+\begin{equation}g'(x) = \lim_{h \to 0} \frac{h}{h} \end{equation}
+
+Enabling us to factor \emph{h} out completely to give a constant
+derivative of \emph{1}:
+
+\begin{equation}g'(x) = 1 \end{equation}
+
+So now we can calculate the derivative for the product of these
+functions by plugging the functions and the derivatives we've calculated
+for them into the product rule equation:
+
+\begin{equation}\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x) \end{equation}
+
+So:
+
+\begin{equation}\frac{d}{dx}[f(x)g(x)] = (4x \cdot (x + 1)) + (2x^{2} \cdot 1) \end{equation}
+
+Which can be simplified to:
+
+\begin{equation}\frac{d}{dx}[f(x)g(x)] = (4x^{2} + 4x) + 2x^{2} \end{equation}
+
+Which can be further simplified to:
+
+\begin{equation}\frac{d}{dx}[f(x)g(x)] = 6x^{2} + 4x \end{equation}
+
+    \subsubsection{The Quotient Rule}\label{the-quotient-rule}
+
+The \emph{quotient rule} applies to functions that are defined as a
+quotient of one expression divided by another; for example:
+
+\begin{equation}r(x) = \frac{s(x)}{t(x)} \end{equation}
+
+In this situation, you can apply the following quotient rule to find the
+derivative of \emph{r(x)}:
+
+\begin{equation}r'(x) = \frac{s'(x)t(x) - s(x)t'(x)}{[t(x)]^{2}} \end{equation}
+
+Here are our definitions for \emph{s(x)} and \emph{t(x)}:
+
+\begin{equation}s(x) = 3x^{2} \end{equation}
+
+\begin{equation}t(x) = 2x\end{equation}
+
+Let's start with \emph{s'(x)}:
+
+\begin{equation}s'(x) = \lim_{h \to 0} \frac{3(x + h)^{2} - 3x^{2}}{h} \end{equation}
+
+This factors out to:
+
+\begin{equation}s'(x) = \lim_{h \to 0} \frac{3x^{2} + 3h^{2} + 6xh - 3x^{2}}{h} \end{equation}
+
+Which when we cancel out the 3x2 and -3x2 is:
+
+\begin{equation}s'(x) = \lim_{h \to 0} \frac{3h^{2} + 6xh}{h} \end{equation}
+
+Which simplifies to:
+
+\begin{equation}s'(x) = \lim_{h \to 0} 3h + 6x \end{equation}
+
+With \emph{h} approaching 0, this is:
+
+\begin{equation}s'(x) = 6x \end{equation}
+
+Now let's look at \emph{t'(x)}:
+
+\begin{equation}t'(x) = \lim_{h \to 0} \frac{2(x + h) - 2x}{h} \end{equation}
+
+We can just factor out the \emph{2(x + h)} on the left:
+
+\begin{equation}t'(x) = \lim_{h \to 0} \frac{2x + 2h - 2x}{h} \end{equation}
+
+Which can be cleaned up to:
+
+\begin{equation}t'(x) = \lim_{h \to 0} \frac{2h}{h} \end{equation}
+
+Enabling us to factor \emph{h} out completely to give a constant
+derivative of \emph{2}:
+
+\begin{equation}t'(x) = 2 \end{equation}
+
+So now we can calculate the derivative for the quotient of these
+functions by plugging the function definitions and the derivatives we've
+calculated for them into the quotient rule equation:
+
+\begin{equation}r'(x) = \frac{(6x \cdot 2x) - (3x^{2} \cdot 2)}{[2x]^{2}} \end{equation}
+
+We can factor out the numerator terms like this:
+
+\begin{equation}r'(x) = \frac{12x^{2} - 6x^{2}}{[2x]^{2}} \end{equation}
+
+Which can then be combined:
+
+\begin{equation}r'(x) = \frac{6x^{2}}{[2x]^{2}} \end{equation}
+
+The denominator is {[}2x{]}2 (note that this is different from 2x2.
+{[}2x{]}2 is 2x • 2x, whereas 2x2 is 2 • x2):
+
+\begin{equation}r'(x) = \frac{6x^{2}}{4x^{2}} \end{equation}
+
+Which simplifies to:
+
+\begin{equation}r'(x) = 1\frac{1}{2} \end{equation}
+
+So the derivative of \emph{r(x)} is 1.5.
+
+    \subsubsection{The Chain Rule}\label{the-chain-rule}
+
+The \emph{chain rule} takes advantage of the fact that equations can be
+encapsulated as functions, and since functions contain equations, it's
+possible to nest one function within another.
+
+For example, consider the following function:
+
+\begin{equation}u(x) = 2x^{2} \end{equation}
+
+We could view the definition of \emph{u(x)} as a composite of two
+functions,; an \emph{inner} function that calculates x2, and an
+\emph{outer} function that multiplies the result of the inner function
+by 2.
+
+\begin{equation}u(x) = \widehat{\color{blue}2\color{blue}(\underline{\color{red}x^{\color{red}2}}\color{blue})} \end{equation}
+
+To make things simpler, we can name these inner and outer functions:
+
+\begin{equation}i(x) = x^{2} \end{equation}
+
+\begin{equation}o(x) = 2x \end{equation}
+
+Note that \emph{x} indicates the input for each function. Function
+\emph{i} takes its input and squares it, and function \emph{o} takes its
+input and multiplies it by 2. When we use these as a composite function,
+the \emph{x} value input into the outer function will be the output from
+the inner function.
+
+Let's take a look at how we can apply these functions to get back to our
+original \emph{u} function:
+
+\begin{equation}u(x) = o(i(x)) \end{equation}
+
+So first we need to find the output of the inner \emph{i} function so we
+can use at as the input value for the outer \emph{o} function. Well,
+that's easy, we know the definition of \emph{i} (square the input), so
+we can just plug it in:
+
+\begin{equation}u(x) = o(x^{2}) \end{equation}
+
+We also know the definition for the outer \emph{o} function (multiply
+the input by 2), so we can just apply that to the input:
+
+\begin{equation}u(x) = 2x^{2} \end{equation}
+
+OK, so now we know how to form a composite function. The \emph{chain
+rule} can be stated like this:
+
+\begin{equation}\frac{d}{dx}[o(i(x))] = o'(i(x)) \cdot i'(x)\end{equation}
+
+Alright, let's start by plugging the output of the inner \emph{i(x)}
+function in:
+
+\begin{equation}\frac{d}{dx}[o(i(x))] = o'(x^{2}) \cdot i'(x)\end{equation}
+
+Now let's use that to calculate the derivative of \emph{o}, replacing
+each \emph{x} in the equation with the output from the \emph{i} function
+(\emph{x2}):
+
+\begin{equation}o'(x) = \lim_{h \to 0} \frac{2(x^{2} + h) - 2x^{2}}{h} \end{equation}
+
+This factors out to:
+
+\begin{equation}o'(x) = \lim_{h \to 0} \frac{2x^{2} + 2h - 2x^{2}}{h} \end{equation}
+
+Which when we cancel out the 2x2 and -2x2 is:
+
+\begin{equation}o'(x) = \lim_{h \to 0} \frac{2h}{h} \end{equation}
+
+Which simplifies to:
+
+\begin{equation}o'(x) = 2 \end{equation}
+
+Now we can calculate \emph{i'(x)}. We know that the definition of
+\emph{i(x)} is x2, and we can use the power rule to determine that
+\emph{i'(x)} is therefore 2x.
+
+So our equation at this point is:
+
+\begin{equation}\frac{d}{dx}[o(i(x))] = 2 \cdot 2x\end{equation}
+
+Which is:
+
+\begin{equation}\frac{d}{dx}[o(i(x))] = 4x\end{equation}
+
+Commonly, the chain rule is stated using a slighly different notation
+that you may find easier to work with. In this case, we can take our
+equation:
+
+\begin{equation}\frac{d}{dx}[o(i(x))] = o'(i(x)) \cdot i'(x)\end{equation}
+
+and rewrite it as
+
+\begin{equation}\frac{du}{dx} = \frac{do}{di}\frac{di}{dx}\end{equation}
+
+We can then complete the calculations like this:
+
+\begin{equation}\frac{du}{dx} = 2 \cdot 2x = 4x\end{equation}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
