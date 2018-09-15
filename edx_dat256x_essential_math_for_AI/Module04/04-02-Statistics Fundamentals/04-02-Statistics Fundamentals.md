@@ -23,15 +23,20 @@ Now, some of the former-students may earn a lot, and others may earn less; but w
 #### Mean
 A common way to define the central value is to use the *mean*, often called the *average*. This is calculated as the sum of the values in the dataset, divided by the number of observations in the dataset. When the dataset consists of the full population, the mean is represented by the Greek symbol ***&mu;*** (*mu*), and the formula is written like this:
 
-\begin{equation}\mu = \frac{\displaystyle\sum_{i=1}^{N}X_{i}}{N}\end{equation}
-
+$$
+\begin{equation}\mu = \frac{\displaystyle\sum{i=1}^{N}X{i}}{N}\end{equation}
+$$
 More commonly, when working with a sample, the mean is represented by ***x&#772;*** (*x-bar*), and the formula is written like this (note the lower case letters used to indicate values from a sample):
 
-\begin{equation}\bar{x} = \frac{\displaystyle\sum_{i=1}^{n}x_{i}}{n}\end{equation}
-
+$$
+\begin{equation}\bar{x} = \frac{\displaystyle\sum{i=1}^{n}x{i}}{n}\end{equation}
+$$
 In the case of our list of heights, this can be calculated as:
 
+$$
 \begin{equation}\bar{x} = \frac{50000+54000+50000+189000+55000+40000+59000}{7}\end{equation}
+$$
+
 
 Which is **71,000**.
 
@@ -60,13 +65,19 @@ If you look closely at the salaries, you can see that out of the seven former st
 #### Median
 OK, let's see if we can find another definition for the central value that more closely reflects the expected earning potential of students attending our school. Another measure of central tendancy we can use is the *median*. To calculate the median, we need to sort the values into ascending order and then find the middle-most value. When there are an odd number of observations, you can find the position of the median value using this formula (where *n* is the number of observations):
 
+$$
 \begin{equation}\frac{n+1}{2}\end{equation}
-
+$$
 Remember that this formula returns the *position* of the median value in the sorted list; not the value itself.
 
 If the number of observations is even, then things are a little (but not much) more complicated. In this case you calculate the median as the average of the two middle-most values, which are found like this:
 
-\begin{equation}\frac{n}{2} \;\;\;\;and \;\;\;\; \frac{n}{2} + 1\end{equation}
+$$
+\frac{n}{2} \text{ and } \frac{n}{2} + 1
+
+
+$$
+
 
 So, for our graduate salaries; first lets sort the dataset:
 
@@ -87,7 +98,7 @@ There's an odd number of observation (7), so the median value is at position (7 
 | 40,000      |
 | 50,000      |
 | 50,000      |
-|***>54,000*** |
+|***> 54,000*** |
 | 55,000      |
 | 59,000      |
 | 189,000     |
@@ -101,7 +112,7 @@ The *pandas.dataframe* class in Python has a ***median*** function to find the m
 import pandas as pd
 
 
-df = pd.DataFrame({'Name': ['Dan', 'Joann', 'Pedro', 'Rosie', 'Ethan', 'Vicky', 'Frederic'],
+df = pd.DataFrame({'Name': ['Dan','Joann','Pedro','Rosie','Ethan', 'Vicky','Frederic'],
                    'Salary':[50000,54000,50000,189000,55000,40000,59000]})
 
 print (df['Salary'].median())
@@ -115,15 +126,15 @@ Another related statistic is the *mode*, which indicates the most frequently occ
 
 Looking at our list of salaries, there are two instances of former students earning **50,000**, but only one instance each for all other salaries:
 
-| Salary      |
-|-------------|
-| 40,000      |
-|***>50,000***|
-|***>50,000***|
-| 54,000      |
-| 55,000      |
-| 59,000      |
-| 189,000     |
+| Salary         |
+| -------------- |
+| 40,000         |
+| ***> 50,000*** |
+| ***> 50,000*** |
+| 54,000         |
+| 55,000         |
+| 59,000         |
+| 189,000        |
 
 The mode is therefore **50,000**.
 
@@ -147,15 +158,15 @@ print (df['Salary'].mode())
 ##### Multimodal Data
 It's not uncommon for a set of data to have more than one value as the mode. For example, suppose Ethan receives a raise that takes his salary to **59,000**:
 
-| Salary      |
-|-------------|
-| 40,000      |
-|***>50,000***|
-|***>50,000***|
-| 54,000      |
-|***>59,000***|
-|***>59,000***|
-| 189,000     |
+| Salary         |
+| -------------- |
+| 40,000         |
+| ***> 50,000*** |
+| ***> 50,000*** |
+| 54,000         |
+| ***> 59,000*** |
+| ***> 59,000*** |
+| 189,000        |
 
 Now there are two values with the highest frequency. This dataset is *bimodal*. More generally, when there is more than one mode value, the data is considered *multimodal*.
 
@@ -166,7 +177,7 @@ The *pandas.dataframe.**mode*** function returns all of the modes:
 import pandas as pd
 
 
-df = pd.DataFrame({'Name': ['Dan', 'Joann', 'Pedro', 'Rosie', 'Ethan', 'Vicky', 'Frederic'],
+df = pd.DataFrame({'Name': ['Dan','Joann','Pedro','Rosie','Ethan','Vicky','Frederic'],
                    'Salary':[50000,54000,50000,189000,59000,40000,59000]})
 
 print (df['Salary'].mode())
@@ -263,9 +274,6 @@ plt.show()
 
 ```
 
-    /opt/conda/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6571: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
 
 
 ![png](output_14_1.png)
@@ -295,7 +303,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 
-df = pd.DataFrame({'Name': ['Dan', 'Joann', 'Pedro', 'Rosie', 'Ethan', 'Vicky', 'Frederic'],
+df = pd.DataFrame({'Name': ['Dan','Joann','Pedro','Rosie', 'Ethan','Vicky','Frederic'],
                    'Hours':[41,40,36,30,35,39,40]})
 
 hours = df['Hours']
@@ -306,9 +314,6 @@ plt.axvline(hours.mean(), color='magenta', linestyle='dashed', linewidth=2)
 plt.axvline(hours.median(), color='green', linestyle='dashed', linewidth=2)
 plt.show()
 ```
-
-    /opt/conda/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6571: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
 
 
 
@@ -351,17 +356,14 @@ plt.axvline(grade.median(), color='green', linestyle='dashed', linewidth=2)
 plt.show()
 ```
 
-    /opt/conda/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6571: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
 
 
 ![png](output_18_1.png)
 
 
-This time, the distribution is symmetric, forming a "bell-shaped" curve. The <span style="color:magenta">***mean***</span>, <span style="color:green">***median***</span>, and mode are at the same location, and the data tails off evenly on both sides from a central peak.
+This time, the distribution is symmetric, forming a "bell-shaped" curve. The <span style="color:magenta">***mean***</span>, <span style="color:green">***median***</span>, and ***mode*** are at the same location, and the data tails off evenly on both sides from a central peak.
 
-Statisticians call this a *normal* distribution (or sometimes a *Gaussian* distribution), and it occurs quite commonly in many scenarios due to something called the *Central Limit Theorem*, which reflects the way continuous probability works - more about that later.
+Statisticians call this a **normal** distribution (or sometimes a **Gaussian** distribution), and it occurs quite commonly in many scenarios due to something called the *Central Limit Theorem*, which reflects the way continuous probability works - more about that later.
 
 #### Skewness and Kurtosis
 You can measure *skewness* (in which direction the data is skewed and to what degree) and kurtosis (how "peaked" the data is) to get an idea of the shape of the data distribution. In Python, you can use the ***skew*** and ***kurt*** functions to find this:
@@ -394,16 +396,12 @@ for col in numcols:
     Salary kurtosis: 6.719828837773431
 
 
-    /opt/conda/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6571: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
-
 
 ![png](output_21_2.png)
 
 
-    
-    
+​    
+​    
     Hours skewness: -1.194570307262883
     Hours kurtosis: 0.9412265624999989
 
@@ -412,8 +410,8 @@ for col in numcols:
 ![png](output_21_4.png)
 
 
-    
-    
+​    
+​    
     Grade skewness: -0.06512433009682762
     Grade kurtosis: 2.7484764913773034
 
@@ -422,8 +420,8 @@ for col in numcols:
 ![png](output_21_6.png)
 
 
-    
-    
+​    
+​    
 
 
 Now let's look at the distribution of a real dataset - let's see how the heights of the father's measured in Galton's study of parent and child heights are distributed:
@@ -451,9 +449,6 @@ plt.show()
 
 ```
 
-    /opt/conda/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6571: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
 
 
 ![png](output_23_1.png)
@@ -473,7 +468,7 @@ The following Python code creates a single Pandas dataframe for our school gradu
 ```python
 import pandas as pd
 
-df = pd.DataFrame({'Name': ['Dan', 'Joann', 'Pedro', 'Rosie', 'Ethan', 'Vicky', 'Frederic'],
+df = pd.DataFrame({'Name': ['Dan','Joann','Pedro','Rosie','Ethan','Vicky','Frederic'],
                    'Salary':[50000,54000,50000,189000,55000,40000,59000],
                    'Hours':[41,40,36,30,35,39,40],
                    'Grade':[50,50,46,95,50,5,57]})
@@ -498,8 +493,9 @@ Let's examine Frederic's grade using this approach. We know he scored 57, but ho
 
 Well, there are seven students in total, and five of them scored less than Frederic; so we can calculate the percentile for Frederic's grade like this:
 
-\begin{equation}\frac{5}{7} \times 100 \approx 71.4\end{equation} 
-
+$$
+\frac{5}{7} \times 100 \approx 71.4
+$$
 So Frederic's score puts him at the 71.4th percentile in his class.
 
 In Python, you can use the ***percentileofscore*** function in the *scipy.stats* package to calculate the percentile for a given value in a set of values:
@@ -522,7 +518,10 @@ print(stats.percentileofscore(df['Grade'], 57, 'strict'))
 
 We've used the strict definition of percentile; but sometimes it's calculated as being the percentage of values that are less than *or equal to* the value you're comparing. In this case, the calculation for Frederic's percentile would include his own score:
 
+$$
 \begin{equation}\frac{6}{7} \times 100 \approx 85.7\end{equation} 
+$$
+
 
 You can calculate this way in Python by using the ***weak*** mode of the ***percentileofscore*** function:
 
@@ -546,7 +545,10 @@ We've considered the percentile of Frederic's grade, and used it to rank him com
 
 To deal with this *grouped* scenario, we can average the percentage rankings for the matching scores. We treat half of the scores matching the one we're ranking as if they are below it, and half as if they are above it. In this case, there were three matching scores of 50, and for each of these we calculate the percentile as if 1 was below and 1 was above. So the calculation for a percentile for Joann based on scores being less than or equal to 50 is:
 
-\begin{equation}(\frac{4}{7}) \times 100 \approx 57.14\end{equation} 
+$$
+\begin{equation}(\frac{4}{7}) \times 100 \approx 57.14\end{equation}
+$$
+
 
 The value of **4** consists of the two scores that are below Joann's score of 50, Joann's own score, and half of the scores that are the same as Joann's (of which there are two, so we count one).
 
@@ -733,11 +735,17 @@ We've seen how to understand the *spread* of our data distribution using the ran
 ##### Variance
 Variance is measured as the average of the squared difference from the mean. For a full population, it's indicated by a squared Greek letter *sigma* (***&sigma;<sup>2</sup>***) and calculated like this:
 
-\begin{equation}\sigma^{2} = \frac{\displaystyle\sum_{i=1}^{N} (X_{i} -\mu)^{2}}{N}\end{equation}
+$$
+\begin{equation}\sigma^{2} = \frac{\displaystyle\sum{i=1}^{N} (X{i} -\mu)^{2}}{N}\end{equation}
+$$
+
 
 For a sample, it's indicated as ***s<sup>2</sup>*** calculated like this:
 
-\begin{equation}s^{2} = \frac{\displaystyle\sum_{i=1}^{n} (x_{i} -\bar{x})^{2}}{n-1}\end{equation}
+$$
+\begin{equation}s^{2} = \frac{\displaystyle\sum{i=1}^{n} (x{i} -\bar{x})^{2}}{n-1}\end{equation}
+$$
+
 
 In both cases, we sum the difference between the individual data values and the mean and square the result. Then, for a full population we just divide by the number of data items to get the average. When using a sample, we divide by the total number of items **minus 1** to correct for sample bias.
 
@@ -745,23 +753,35 @@ Let's work this out for our student grades (assuming our data is a sample from t
 
 First, we need to calculate the mean grade:
 
+$$
 \begin{equation}\bar{x} = \frac{50+50+46+95+50+5+57}{7}\approx 50.43\end{equation}
+$$
+
 
 Then we can plug that into our formula for the variance:
+$$
+\begin{equation}s^{2} = \frac{(50-50.43){2}+(50-50.43){2}+(46-50.43){2}+(95-50.43){2}+(50-50.43){2}+(5-50.43){2}+(57-50.43)^{2}}{7-1}\end{equation}
+$$
 
-\begin{equation}s^{2} = \frac{(50-50.43)^{2}+(50-50.43)^{2}+(46-50.43)^{2}+(95-50.43)^{2}+(50-50.43)^{2}+(5-50.43)^{2}+(57-50.43)^{2}}{7-1}\end{equation}
 
 So:
 
+$$
 \begin{equation}s^{2} = \frac{0.185+0.185+19.625+1986.485+0.185+2063.885+43.165}{6}\end{equation}
+$$
+
 
 Which simplifies to:
-
+$$
 \begin{equation}s^{2} = \frac{4113.715}{6}\end{equation}
+$$
+
 
 Giving the result:
-
+$$
 \begin{equation}s^{2} \approx 685.619\end{equation}
+$$
+
 
 The higher the variance, the more spread your data is around the mean.
 
@@ -786,18 +806,26 @@ print(df['Grade'].var())
 To calculate the variance, we squared the difference of each value from the mean. If we hadn't done this, the numerator of our fraction would always end up being zero (because the mean is at the center of our values). However, this means that the variance is not in the same unit of measurement as our data - in our case, since we're calculating the variance for grade points, it's in grade points squared; which is not very helpful.
 
 To get the measure of variance back into the same unit of measurement, we need to find its square root:
-
+$$
 \begin{equation}s = \sqrt{685.619} \approx 26.184\end{equation}
+$$
+
 
 So what does this value represent?
 
 It's the *standard deviation* for our grades data. More formally, it's calculated like this for a full population:
 
-\begin{equation}\sigma = \sqrt{\frac{\displaystyle\sum_{i=1}^{N} (X_{i} -\mu)^{2}}{N}}\end{equation}
+$$
+\begin{equation}\sigma = \sqrt{\frac{\displaystyle\sum{i=1}^{N} (X{i} -\mu)^{2}}{N}}\end{equation}
+$$
+
 
 Or like this for a sample:
 
-\begin{equation}s = \sqrt{\frac{\displaystyle\sum_{i=1}^{n} (x_{i} -\bar{x})^{2}}{n-1}}\end{equation}
+$$
+\begin{equation}s = \sqrt{\frac{\displaystyle\sum{i=1}^{n} (x{i} -\bar{x})^{2}}{n-1}}\end{equation}
+$$
+
 
 Note that in both cases, it's just the square root of the corresponding variance forumla!
 
@@ -869,9 +897,6 @@ plt.axvline(grade.mean(), color='grey', linestyle='dashed', linewidth=1)
 plt.show()
 ```
 
-    /opt/conda/lib/python3.6/site-packages/matplotlib/axes/_axes.py:6571: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
-      warnings.warn("The 'normed' kwarg is deprecated, and has been "
-
 
 
 ![png](output_52_1.png)
@@ -891,16 +916,17 @@ However, if she tells you how many standard deviations higher than the mean her 
 
 So how do we know how many standard deviations above or below the mean a particular value is? We call this a *Z Score*, and it's calculated like this for a full population:
 
+$$
 \begin{equation}Z = \frac{x - \mu}{\sigma}\end{equation}
-
+$$
 or like this for a sample:
-
+$$
 \begin{equation}Z = \frac{x - \bar{x}}{s}\end{equation}
-
+$$
 So, let's examine Rosie's grade of 95. Now that we know the *mean* grade is 50.43 and the *standard deviation* is 26.184, we can calculate the Z Score for this grade like this:
-
-\begin{equation}Z = \frac{95 - 50.43}{26.184} = 1.702\end{equation}.
-
+$$
+\begin{equation}Z = \frac{95 - 50.43}{26.184} = 1.702\end{equation}
+$$
 So Rosie's grade is 1.702 standard deviations above the mean.
 
 ### Summarizing Data Distribution in Python
@@ -910,7 +936,7 @@ We've seen how to obtain individual statistics in Python, but you can also use t
 ```python
 import pandas as pd
 
-df = pd.DataFrame({'Name': ['Dan', 'Joann', 'Pedro', 'Rosie', 'Ethan', 'Vicky', 'Frederic'],
+df = pd.DataFrame({'Name': ['Dan','Joann','Pedro','Rosie','Ethan','Vicky','Frederic'],
                    'Salary':[50000,54000,50000,189000,55000,40000,59000],
                    'Hours':[41,40,36,17,35,39,40],
                    'Grade':[50,50,46,95,50,5,57]})
