@@ -3,12 +3,18 @@ A repository store for all mathematic references, jupyter notebooks, and notes f
 
 These include:
 
-| Institution | Course Code | Course                       | Year        |
-| ----------- | ----------- | ---------------------------- | ----------- |
-| UOW         | MATH221     | Math for Computer Science    | Autumn 2018 |
-| edX         | DAT256x     | Essential Mathematics for AI | 2018        |
-| UOW         | MATH223     | Math for IT                  | Autumn 2019 |
-|             |             |                              |             |
+| Institution  | Course Code | Course                       | Year        |
+| ------------ | ----------- | ---------------------------- | ----------- |
+| Khan Academy | -           | Various Courses              |             |
+| UOW          | MATH221     | Math for Computer Science    | Autumn 2018 |
+| edX          | DAT256x     | Essential Mathematics for AI | 2018        |
+| UOW          | MATH223     | Math for IT                  | Autumn 2019 |
+
+### Khan Academy
+
+Various topics include:
+
+* 
 
 ### MATH221 - Math for Computer Science
 
@@ -38,4 +44,6 @@ Topics:
 
 Topics:
 
-* 
+* Data Analysis
+* Probability
+* More to come...
